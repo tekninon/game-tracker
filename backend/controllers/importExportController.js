@@ -1,4 +1,4 @@
-import Game from "../models/Game";
+import Game from "../models/Game.js";
 import { Parser } from "json2csv";
 import csvParser from "csv-parser";
 import fs from "fs";

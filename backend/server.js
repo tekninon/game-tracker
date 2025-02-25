@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import gameRoutes from "./routes/games.js";
+import importExportRoutes from "./routes/importExport.js";
+
 
 dotenv.config();
 
@@ -13,7 +15,8 @@ app.use(express.json());
 app.use(cors());
 
 // Routes
-app.use("api//games", gameRoutes);
+app.use("api/games", gameRoutes);
+app.use("/api/importExport", importExportRoutes);
 
 // Connexion à MongoDB
 mongoose
