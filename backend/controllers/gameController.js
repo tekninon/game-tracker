@@ -5,7 +5,9 @@ export const addGame = async (req, res) => {
   try {
     const newGame = new Game(req.body);
     await newGame.save();
-    res.status(201).json({ message: "Jeu ajouté avec succès", id: newGame._id });
+    res
+      .status(201)
+      .json({ message: "Jeu ajouté avec succès", id: newGame._id });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -35,9 +37,14 @@ export const getGameById = async (req, res) => {
 // 🔹 Mettre à jour un jeu
 export const updateGame = async (req, res) => {
   try {
-    const updatedGame = await Game.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!updatedGame) return res.status(404).json({ message: "Jeu non trouvé" });
-    res.status(200).json({ message: "Jeu mis à jour avec succès", game: updatedGame });
+    const updatedGame = await Game.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!updatedGame)
+      return res.status(404).json({ message: "Jeu non trouvé" });
+    res
+      .status(200)
+      .json({ message: "Jeu mis à jour avec succès", game: updatedGame });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -47,7 +54,8 @@ export const updateGame = async (req, res) => {
 export const deleteGame = async (req, res) => {
   try {
     const deletedGame = await Game.findByIdAndDelete(req.params.id);
-    if (!deletedGame) return res.status(404).json({ message: "Jeu non trouvé" });
+    if (!deletedGame)
+      return res.status(404).json({ message: "Jeu non trouvé" });
     res.status(200).json({ message: "Jeu supprimé avec succès" });
   } catch (error) {
     res.status(500).json({ error: error.message });

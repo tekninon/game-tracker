@@ -4,7 +4,7 @@ import {
   getAllGames,
   getGameById,
   updateGame,
-  deleteGame
+  deleteGame,
 } from "../controllers/gameController.js";
 
 const router = express.Router();
