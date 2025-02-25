@@ -33,6 +33,21 @@
           </select>
         </div>
 
+        <div class="form-group checkbox">
+          <label for="multiplayer">🎮 Multijoueur :</label>
+          <input type="checkbox" v-model="localGame.multiplayer" id="multiplayer" />
+        </div>
+
+        <div class="form-group">
+          <label for="rating">⭐ Note (0-10) :</label>
+          <input v-model.number="localGame.rating" type="number" id="rating" min="0" max="10" />
+        </div>
+
+        <div class="form-group">
+          <label for="playtime">⏳ Temps de jeu (heures) :</label>
+          <input v-model.number="localGame.playtime" type="number" id="playtime" min="0" />
+        </div>
+
         <div class="form-group">
           <label for="difficulty">🎯 Difficulté :</label>
           <select v-model="localGame.difficulty" id="difficulty">
@@ -43,22 +58,35 @@
         </div>
 
         <div class="form-group">
-          <label for="rating">⭐ Note (0-10) :</label>
-          <input v-model.number="localGame.rating" type="number" id="rating" min="0" max="10" />
+          <label for="replayability">🔄 Rejouabilité (0-5) :</label>
+          <input
+            v-model.number="localGame.replayability"
+            type="number"
+            id="replayability"
+            min="0"
+            max="5"
+          />
         </div>
 
-        <div class="form-group">
+        <div class="form-group full-width">
           <label for="summary">📜 Résumé :</label>
           <textarea v-model="localGame.summary" id="summary"></textarea>
         </div>
 
-        <div class="form-group">
-          <label for="comments">💬 Commentaire :</label>
+        <div class="form-group full-width">
+          <label for="comments">💬 Commentaires :</label>
           <textarea v-model="localGame.comments" id="comments"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="image">🖼️ URL de l'image :</label>
+          <input v-model="localGame.image" type="text" id="image" placeholder="URL de l'image" />
         </div>
       </div>
 
-      <button type="submit" class="btn-submit">{{ isEdit ? 'Mettre à jour' : 'Ajouter' }}</button>
+      <button type="submit" class="btn-submit">
+        {{ isEdit ? '✅ Mettre à jour' : '✅ Ajouter' }}
+      </button>
     </form>
   </div>
 </template>
@@ -79,16 +107,19 @@ export default {
       platform: '',
       genre: '',
       status: 'Non terminé',
-      difficulty: 'Moyen',
+      multiplayer: false,
       rating: 5,
+      playtime: 0,
+      difficulty: 'Moyen',
+      replayability: 0,
       summary: '',
       comments: '',
+      image: '',
     })
 
     const genreList = ref([])
     const platformList = ref([])
 
-    // Met à jour les données locales lorsqu'on édite un jeu
     watch(
       () => props.game,
       (newGame) => {
@@ -123,7 +154,6 @@ export default {
 </script>
 
 <style scoped>
-/* Même style que GameForm.vue */
 .form-container {
   max-width: 700px;
   margin: auto;
@@ -149,6 +179,10 @@ h2 {
   flex-direction: column;
 }
 
+.full-width {
+  grid-column: span 2;
+}
+
 label {
   font-weight: bold;
   margin-bottom: 5px;
@@ -165,12 +199,34 @@ textarea {
   background: #f8f8f8;
 }
 
+textarea {
+  min-height: 80px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.checkbox {
+  flex-direction: row;
+  align-items: center;
+}
+
+.checkbox input {
+  width: auto;
+  margin-left: 10px;
+}
+
 .btn-submit {
   width: 100%;
   padding: 12px;
   margin-top: 20px;
   background: #007bff;
   color: white;
+  border: none;
   font-size: 16px;
   font-weight: bold;
   border-radius: 6px;

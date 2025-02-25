@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import { useToast } from 'vue-toastification' // Assure-toi que cet import est présent ✅
+
 export default {
   props: {
     game: Object,
@@ -34,6 +36,7 @@ export default {
   data() {
     return {
       showConfirmPopup: false,
+      toast: useToast(),
     }
   },
   methods: {

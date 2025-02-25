@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/pages/Home.vue'
-import GameForm from '@/pages/GameForm.vue'
+import GameForm from '@/pages/AddGame.vue'
 import EditGame from '@/pages/EditGame.vue'
 
 const routes = [
