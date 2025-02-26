@@ -25,6 +25,11 @@
         </div>
 
         <div class="form-group">
+          <label for="startDate">📅 Date de début :</label>
+          <Datepicker v-model="localGame.startDate" id="startDate" :format="'dd/MM/yyyy'" />
+        </div>
+
+        <div class="form-group">
           <label for="status">📌 Statut :</label>
           <select v-model="localGame.status" id="status">
             <option value="Terminé">Terminé</option>
@@ -94,8 +99,12 @@
 <script>
 import { ref, watch, onMounted } from 'vue'
 import axios from 'axios'
+import Datepicker from '@vuepic/vue-datepicker'
+import '@vuepic/vue-datepicker/dist/main.css'
 
 export default {
+  components: { Datepicker },
+
   props: {
     game: Object,
     isEdit: Boolean,
@@ -108,6 +117,7 @@ export default {
       genre: '',
       status: 'Non terminé',
       multiplayer: false,
+      startDate: null, // Ajout de la date
       rating: 5,
       playtime: 0,
       difficulty: 'Moyen',

@@ -1,5 +1,9 @@
 import express from "express";
-import { exportGames, importGames, upload } from "../controllers/importExportController.js";
+import {
+  exportGames,
+  importGames,
+  upload,
+} from "../controllers/importExportController.js";
 
 const router = express.Router();
 

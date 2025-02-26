@@ -3,7 +3,9 @@
 ## 🎮 Endpoints des jeux vidéo
 
 ### 📌 Créer un jeu
-**POST `/games`**  
+
+**POST `/games`**
+
 - **Body (JSON)** :
   ```json
   {
@@ -29,7 +31,9 @@
 ---
 
 ### 📌 Récupérer tous les jeux
-**GET `/games`**  
+
+**GET `/games`**
+
 - **Réponse (JSON)** :
   ```json
   [
@@ -46,7 +50,9 @@
 ---
 
 ### 📌 Récupérer un jeu par son ID
-**GET `/games/:id`**  
+
+**GET `/games/:id`**
+
 - **Réponse (JSON)** :
   ```json
   {
@@ -61,7 +67,9 @@
 ---
 
 ### 📌 Modifier un jeu
-**PUT `/games/:id`**  
+
+**PUT `/games/:id`**
+
 - **Body (JSON)** (Seuls les champs à modifier) :
   ```json
   { "status": "Non terminé", "rating": 8 }
@@ -74,7 +82,9 @@
 ---
 
 ### 📌 Supprimer un jeu
-**DELETE `/games/:id`**  
+
+**DELETE `/games/:id`**
+
 - **Réponse (JSON)** :
   ```json
   { "message": "Jeu supprimé avec succès" }
@@ -82,16 +92,22 @@
 
 ---
 
-## 📂 Import / Export des données  
+## TODO
+
+## 📂 Import / Export des données
 
 ### 📌 Exporter les jeux
-**GET `/export?format=json|csv`**  
+
+**GET `/export?format=json|csv`**
+
 - **Réponse (Fichier JSON/CSV)** contenant tous les jeux.
 
 ---
 
 ### 📌 Importer des jeux
-**POST `/import`**  
+
+**POST `/import`**
+
 - **Body (Fichier JSON/CSV)** :
   - Le serveur vérifie l’absence de doublons (titre + plateforme).
   - Ajoute les nouveaux jeux.
@@ -99,4 +115,3 @@
   ```json
   { "message": "Importation réussie", "new_games_added": 10 }
   ```
-
