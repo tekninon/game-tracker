@@ -3,6 +3,7 @@
     <nav class="navbar">
       <router-link to="/" active-class="active">🎮 Liste des Jeux</router-link>
       <router-link to="/add-game" active-class="active">➕ Ajouter un Jeu</router-link>
+      <router-link to="/stats" active-class="active">📊 Statistiques</router-link>
     </nav>
     <router-view />
   </div>

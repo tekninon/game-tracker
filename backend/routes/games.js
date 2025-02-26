@@ -5,6 +5,7 @@ import {
   getGameById,
   updateGame,
   deleteGame,
+  getGameStats,
 } from "../controllers/gameController.js";
 
 const router = express.Router();
@@ -12,6 +13,8 @@ const router = express.Router();
 // Définition des routes
 router.post("/", addGame);
 router.get("/", getAllGames);
+router.get("/stats", getGameStats);
+
 router.get("/:id", getGameById);
 router.put("/:id", updateGame);
 router.delete("/:id", deleteGame);

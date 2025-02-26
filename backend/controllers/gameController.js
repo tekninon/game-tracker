@@ -61,3 +61,39 @@ export const deleteGame = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// 🔹 Récupérer les statistiques de jeux
+export const getGameStats = async (req, res) => {
+  try {
+    // 📌 1️⃣ Calcul du temps total de jeu
+    const totalPlaytimeResult = await Game.aggregate([
+      { $group: { _id: null, totalPlaytime: { $sum: "$playtime" } } },
+    ]);
+    const totalPlaytime = totalPlaytimeResult[0]?.totalPlaytime || 0;
+
+    // 📌 2️⃣ Répartition des genres joués
+    const genresResult = await Game.aggregate([
+      { $unwind: "$genre" }, // Éclate les tableaux de genres pour les compter individuellement
+      { $group: { _id: "$genre", count: { $sum: 1 } } },
+      { $sort: { count: -1 } },
+    ]);
+    const genresDistribution = genresResult.map((g) => ({
+      genre: g._id,
+      count: g.count,
+    }));
+
+    // 📌 3️⃣ Répartition des plateformes les plus utilisées
+    const platformsResult = await Game.aggregate([
+      { $group: { _id: "$platform", count: { $sum: 1 } } },
+      { $sort: { count: -1 } },
+    ]);
+    const platformsDistribution = platformsResult.map((p) => ({
+      platform: p._id,
+      count: p.count,
+    }));
+
+    res.json({ totalPlaytime, genresDistribution, platformsDistribution });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
